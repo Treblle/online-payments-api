@@ -4,6 +4,29 @@ This is a Laravel-based implementation of the Online Payments API (v2.7.0) from 
 
 This API mimicks all functionality of the JPM Payments API and comes with the Treblle SDK integrated.
 
+## Getting Started
+
+1. **Install Dependencies**
+   ```bash
+   composer install
+   ```
+
+2. **Configure your enviroment**
+  Rename .env.example to .env and configure the Treblle SDK Token and API Key
+
+2. **Start the Development Server**
+   ```bash
+   php artisan serve
+   ```
+
+3. **Test the API**
+   The API will be available at `http://localhost:8000/api/v2/`
+
+   ```bash
+   curl http://localhost:8000/api/v2/healthcheck/payments
+   ```
+
+
 ## Project Structure
 
 ```
@@ -77,7 +100,7 @@ All API endpoints (except health checks) require the following headers:
 Optional headers:
 - `minorVersion`: API minor version identifier
 
-## Sample Usage
+## Sample Requests
 
 ### Create a Payment
 
@@ -178,60 +201,3 @@ curl -X POST "http://localhost:8000/api/v2/refunds" \
   }
 }
 ```
-
-## Key Components
-
-### MockDataService
-Generates realistic mock responses for all transaction types with proper:
-- Transaction IDs and request tracking
-- Payment method masking for security
-- Processor response simulation
-- Fraud rule evaluation
-- Risk scoring algorithms
-
-### Validation
-- Comprehensive input validation using Laravel Form Requests
-- Required header validation via middleware
-- Error response standardization
-- Currency code and amount validation
-
-### Security Features
-- Card number masking in all responses
-- Required merchant authentication headers
-- Request ID tracking for idempotency
-- Proper error messages without sensitive data exposure
-
-## Getting Started
-
-1. **Install Dependencies**
-   ```bash
-   composer install
-   ```
-
-2. **Start the Development Server**
-   ```bash
-   php artisan serve
-   ```
-
-3. **Test the API**
-   The API will be available at `http://localhost:8000/api/v2/`
-
-4. **Health Check**
-   ```bash
-   curl http://localhost:8000/api/v2/healthcheck/payments
-   ```
-
-## Configuration
-
-The API is configured to use SQLite database (though not actively used for mock responses). All configuration is standard Laravel setup with custom middleware and exception handling for API-specific requirements.
-
-## Mock Data Behavior
-
-- All payment requests return APPROVED status with realistic transaction IDs
-- Card numbers are automatically masked (showing only last 4 digits)
-- Fraud checks include randomized risk scores and rule evaluations
-- All timestamps use ISO 8601 format
-- Pagination defaults to 10 items per page
-- Transaction states follow the OpenAPI specification
-
-This implementation provides a fully functional API that matches the OpenAPI 2.7.0 specification behavior while using mock data instead of processing real transactions.

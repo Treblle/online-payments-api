@@ -9,7 +9,7 @@ use App\Http\Controllers\FraudCheckController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['api'])
+Route::middleware(['api', 'treblle'])
 ->prefix('v2')
 ->group(function () {
     
