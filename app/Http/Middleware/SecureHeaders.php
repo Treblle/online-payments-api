@@ -21,7 +21,7 @@ class SecureHeaders
         $response->headers->set('Content-Security-Policy', "default-src 'self'; frame-ancestors 'none'");
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('Allow', 'GET, POST');
-
+        $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
         
         return $response;
     }
