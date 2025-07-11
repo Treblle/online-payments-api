@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
+
 class RefundController extends Controller
 {
     public function create(Request $request): JsonResponse
@@ -35,9 +37,9 @@ class RefundController extends Controller
         return response()->json([
             'refunds' => [
                 [
-                    'transactionId' => 'ref_12345',
-                    'parentTransactionId' => 'txn_12345',
-                    'amount' => 500,
+                    'transactionId' => 'ref_' . uniqid(),
+                    'parentTransactionId' => 'txn_' . uniqid(),
+                    'amount' => rand(100,10000),
                     'currency' => 'USD',
                     'transactionState' => 'REFUNDED',
                     'responseStatus' => 'APPROVED',
@@ -57,9 +59,9 @@ class RefundController extends Controller
         // Mock refund details
         return response()->json([
             'transactionId' => $id,
-            'parentTransactionId' => 'txn_12345',
-            'requestId' => '10cc0270-7bed-11e9-a188-1763956dd7f6',
-            'amount' => 500,
+            'parentTransactionId' => 'txn_' . uniqid(),
+            'requestId' => (string) Str::uuid(),
+            'amount' => rand(100,10000),
             'currency' => 'USD',
             'transactionState' => 'REFUNDED',
             'responseStatus' => 'APPROVED',
@@ -68,7 +70,7 @@ class RefundController extends Controller
             'createdAt' => now()->subHour()->toISOString(),
             'refundType' => 'REFERENCED',
             'merchant' => [
-                'merchantId' => '998482157630'
+                'merchantId' => rand(pow(10, 12 - 1), pow(10, 12) - 1)
             ]
         ]);
     }

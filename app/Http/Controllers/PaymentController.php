@@ -29,16 +29,16 @@ class PaymentController extends Controller
         return response()->json([
             'payments' => [
                 [
-                    'transactionId' => 'txn_12345',
-                    'amount' => 1000,
+                    'transactionId' => 'txn_'.uniqid(),
+                    'amount' => rand(100,10000),
                     'currency' => 'USD',
                     'transactionState' => 'AUTHORIZED',
                     'responseStatus' => 'APPROVED',
                     'createdAt' => now()->subHours(2)->toISOString()
                 ],
                 [
-                    'transactionId' => 'txn_12346',
-                    'amount' => 2500,
+                    'transactionId' => 'txn_'.uniqid(),
+                    'amount' => rand(100,10000),
                     'currency' => 'USD',
                     'transactionState' => 'CAPTURED',
                     'responseStatus' => 'APPROVED',
@@ -59,7 +59,7 @@ class PaymentController extends Controller
         return response()->json([
             'transactionId' => $id,
             'requestId' => '10cc0270-7bed-11e9-a188-1763956dd7f6',
-            'amount' => 1234,
+            'amount' => rand(100,10000),
             'currency' => 'USD',
             'transactionState' => 'AUTHORIZED',
             'responseStatus' => 'APPROVED',

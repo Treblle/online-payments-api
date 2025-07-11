@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CaptureController extends Controller
 {
@@ -35,9 +36,9 @@ class CaptureController extends Controller
         return response()->json([
             'captures' => [
                 [
-                    'transactionId' => 'cap_12345',
-                    'parentTransactionId' => 'txn_12345',
-                    'amount' => 1000,
+                    'transactionId' => 'cap_' . uniqid(),
+                    'parentTransactionId' => 'txn_'. uniqid(),
+                    'amount' => rand(100, 10000),
                     'currency' => 'USD',
                     'transactionState' => 'CAPTURED',
                     'responseStatus' => 'APPROVED',
@@ -57,9 +58,9 @@ class CaptureController extends Controller
         // Mock capture details
         return response()->json([
             'transactionId' => $id,
-            'parentTransactionId' => 'txn_12345',
-            'requestId' => '10cc0270-7bed-11e9-a188-1763956dd7f6',
-            'amount' => 1000,
+            'parentTransactionId' => 'txn_' . uniqid(),
+            'requestId' => (string) Str::uuid(),
+            'amount' => rand(100,10000),
             'currency' => 'USD',
             'transactionState' => 'CAPTURED',
             'responseStatus' => 'APPROVED',

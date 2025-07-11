@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class FraudCheckController extends Controller
 {
@@ -43,7 +44,7 @@ class FraudCheckController extends Controller
         return response()->json([
             'fraudChecks' => [
                 [
-                    'transactionId' => 'fraud_12345',
+                    'transactionId' => 'fraud_' . uniqid(),
                     'transactionState' => 'CHECKED',
                     'responseStatus' => 'APPROVED',
                     'fraudScore' => 25,
@@ -64,7 +65,7 @@ class FraudCheckController extends Controller
         // Mock fraud check details
         return response()->json([
             'transactionId' => $id,
-            'requestId' => '10cc0270-7bed-11e9-a188-1763956dd7f6',
+            'requestId' => (string) Str::uuid(),
             'transactionState' => 'CHECKED',
             'responseStatus' => 'APPROVED',
             'responseCode' => '000',
@@ -90,7 +91,7 @@ class FraudCheckController extends Controller
                 ]
             ],
             'merchant' => [
-                'merchantId' => '998482157630'
+                'merchantId' => rand(pow(10, 12 - 1), pow(10, 12) - 1)
             ]
         ]);
     }

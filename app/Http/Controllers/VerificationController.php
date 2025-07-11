@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class VerificationController extends Controller
 {
@@ -34,7 +35,7 @@ class VerificationController extends Controller
         return response()->json([
             'verifications' => [
                 [
-                    'transactionId' => 'ver_12345',
+                    'transactionId' => 'ver_' . uniqid(),
                     'currency' => 'USD',
                     'transactionState' => 'VERIFIED',
                     'responseStatus' => 'APPROVED',
@@ -55,7 +56,7 @@ class VerificationController extends Controller
         // Mock verification details
         return response()->json([
             'transactionId' => $id,
-            'requestId' => '10cc0270-7bed-11e9-a188-1763956dd7f6',
+            'requestId' => (string) Str::uuid(),
             'currency' => 'USD',
             'transactionState' => 'VERIFIED',
             'responseStatus' => 'APPROVED',
@@ -64,7 +65,7 @@ class VerificationController extends Controller
             'createdAt' => now()->subHour()->toISOString(),
             'verificationMethod' => 'CARD_VERIFICATION',
             'merchant' => [
-                'merchantId' => '998482157630'
+                'merchantId' => rand(pow(10, 12 - 1), pow(10, 12) - 1)
             ],
             'paymentMethodType' => [
                 'card' => [

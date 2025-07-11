@@ -37,8 +37,8 @@ class RandomApiCall extends Command
         
         try {
             $response = Http::withHeaders([
-                'X-Request-ID' => uniqid('random_'),
-                'X-Merchant-ID' => 'MERCHANT_' . rand(1000, 9999),
+                'Request-ID' => uniqid('random_'),
+                'Merchant-ID' => rand(pow(10, 12 - 1), pow(10, 12) - 1),
                 'Content-Type' => 'application/json'
             ])->timeout(30);
             
@@ -79,17 +79,17 @@ class RandomApiCall extends Command
     {
         return [
             [
-                'path' => '/healthcheck/payments',
+                'path' => '/payments/txn_'.uniqid(),
                 'method' => 'GET',
                 'data' => []
             ],
             [
-                'path' => '/healthcheck/refunds',
+                'path' => '/refunds/txn_'.uniqid(),
                 'method' => 'GET',
                 'data' => []
             ],
             [
-                'path' => '/healthcheck/verifications',
+                'path' => '/payments',
                 'method' => 'GET',
                 'data' => []
             ],
