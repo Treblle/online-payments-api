@@ -40,7 +40,7 @@ class RandomApiCall extends Command
         $merchant_id = rand(pow(10, 12 - 1), pow(10, 12) - 1);
 
         $treblleMetadata = [
-            'user-id' => Arr::random(['PayPal', 'Rippling', 'Sephora', 'Lyft', 'Domino\'s', 'Macy\'s']),
+            'user-id' => Arr::random(['PayPal', 'Rippling', 'Sephora', 'Lyft', 'Domino\'s', 'Macy\'s', 'Paramount Pictures', 'Caterpillar', 'Klarna', 'Norsk Hydro']),
             'Plan' => Arr::random(['Platinum Plan', 'Titanium Plan', 'Gold Plan']),
             'Region' => Arr::random(['US', 'EU', 'APAC']),
             'Merchant ID' => $merchant_id,
@@ -122,9 +122,9 @@ class RandomApiCall extends Command
                 'data' => []
             ],
             [
-                'path' => '/refunds',
+                'path' => '/refunds?page=1',
                 'method' => 'GET',
-                'data' => ['page' => 1]
+                'data' => []
             ],
             [
                 'path' => '/payments',
@@ -137,9 +137,9 @@ class RandomApiCall extends Command
                 'data' => []
             ],
             [
-                'path' => '/fraudcheck/' . uniqid(),
+                'path' => '/fraudcheck/' . uniqid(). '?page=1',
                 'method' => 'GET',
-                'data' => ['page' => 1]
+                'data' => []
             ],
             [
                 'path' => '/verifications',
