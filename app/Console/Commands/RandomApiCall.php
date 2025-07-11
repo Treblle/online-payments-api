@@ -39,12 +39,11 @@ class RandomApiCall extends Command
 
         $merchant_id = rand(pow(10, 12 - 1), pow(10, 12) - 1);
 
-
         $treblleMetadata = [
             'user-id' => Arr::random(['PayPal', 'Rippling', 'Sephora', 'Lyft', 'Domino\'s', 'Macy\'s']),
             'Plan' => Arr::random(['Platinum Plan', 'Titanium Plan', 'Gold Plan']),
             'Region' => Arr::random(['US', 'EU', 'APAC']),
-            'Merchant ID' => $merchant_id
+            'Merchant ID' => $merchant_id,
         ];
         
         try {
@@ -53,7 +52,7 @@ class RandomApiCall extends Command
                 'Merchant-ID' => $merchant_id,
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . Str::random(24),
-                'treblle-metadata' => '{}'
+                'treblle-metadata' => json_encode($treblleMetadata)
             ])->timeout(30);
             
             if ($randomEndpoint['method'] === 'GET') {
