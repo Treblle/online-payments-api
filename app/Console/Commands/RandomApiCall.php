@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class RandomApiCall extends Command
 {
@@ -39,7 +40,8 @@ class RandomApiCall extends Command
             $response = Http::withHeaders([
                 'Request-ID' => uniqid('random_'),
                 'Merchant-ID' => rand(pow(10, 12 - 1), pow(10, 12) - 1),
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . Str::random(24),
             ])->timeout(30);
             
             if ($randomEndpoint['method'] === 'GET') {
