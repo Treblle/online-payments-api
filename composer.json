@@ -9,7 +9,6 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
-        "treblle/security-headers": "^0.0.3",
         "treblle/treblle-laravel": "^5.0"
     },
     "require-dev": {

@@ -65,6 +65,7 @@ class RandomApiCall extends Command
         
         try {
             $response = Http::withHeaders([
+                'Accept' => 'application/json',
                 'Request-ID' => uniqid('random_'),
                 'Merchant-ID' => $merchant_id,
                 'Content-Type' => 'application/json',
