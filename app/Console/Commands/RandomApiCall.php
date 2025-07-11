@@ -122,7 +122,42 @@ class RandomApiCall extends Command
                 'data' => []
             ],
             [
+                'path' => '/refunds',
+                'method' => 'GET',
+                'data' => ['page' => 1]
+            ],
+            [
                 'path' => '/payments',
+                'method' => 'GET',
+                'data' => []
+            ],
+            [
+                'path' => '/fraudcheck',
+                'method' => 'GET',
+                'data' => []
+            ],
+            [
+                'path' => '/fraudcheck/' . uniqid(),
+                'method' => 'GET',
+                'data' => ['page' => 1]
+            ],
+            [
+                'path' => '/verifications',
+                'method' => 'GET',
+                'data' => []
+            ],
+            [
+                'path' => '/captures',
+                'method' => 'GET',
+                'data' => []
+            ],
+            [
+                'path' => '/captures' . uniqid(),
+                'method' => 'GET',
+                'data' => []
+            ],
+            [
+                'path' => '/verifications/' . uniqid(),
                 'method' => 'GET',
                 'data' => []
             ],
@@ -158,6 +193,15 @@ class RandomApiCall extends Command
                     'amount' => rand(100, 5000),
                     'currency' => 'USD',
                     'parentTransactionId' => 'txn_' . uniqid()
+                ]
+            ],
+            [
+                'path' => '/payments/txn_' . uniqid(). '/captures',
+                'method' => 'POST',
+                'data' => [
+                    'amount' => rand(100, 5000),
+                    'currency' => 'USD',
+                    'finalCapture' => true
                 ]
             ],
             [
