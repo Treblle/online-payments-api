@@ -46,6 +46,14 @@ class RandomApiCall extends Command
             'Merchant ID' => $merchant_id,
         ];
 
+        $ips = [
+            '23.81.13.142', '24.114.50.83', '131.100.7.248', '151.236.22.87',
+            '80.216.0.228', '13.55.70.207', '60.240.241.135', '85.203.34.243',
+            '106.198.15.213', '217.149.172.85', '5.157.50.151', '174.198.0.163',
+            '106.198.15.213', '217.149.172.85', '5.157.50.151', '20.102.199.208',
+            '193.93.253.70', '75.99.242.149', '188.121.41.131', '172.56.42.194'
+        ];
+
         $userAgents = [
             'Mozilla/5.0 (X11; U; Linux armv7l like Android; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/533.2+ Kindle/3.0+',
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edg/91.0.864.48',
@@ -62,6 +70,7 @@ class RandomApiCall extends Command
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . Str::random(24),
                 'user-agent' => Arr::random($userAgents),
+                'X-Forwarded-For' => Arr::random($ips),
                 'treblle-metadata' => json_encode($treblleMetadata)
             ])->timeout(30);
             
