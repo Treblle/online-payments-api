@@ -100,6 +100,14 @@ class RandomApiCall extends Command
                     'amount' => rand(100, 10000),
                     'currency' => 'USD',
                     'captureMethod' => rand(0, 1) ? 'NOW' : 'LATER',
+                    'merchant' => [
+                        'merchantCategoryCode' => '4111111111111111',
+                        'merchantSoftware' => [
+                            'companyName' => 'Treblle Inc.',
+                            'productName' => 'Treblle',
+                            'version' => '1.0.0'
+                        ]
+                    ],
                     'paymentMethodType' => [
                         'card' => [
                             'accountNumber' => '4111111111111111',
