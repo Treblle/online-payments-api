@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class RandomApiCall extends Command
 {
@@ -35,13 +36,24 @@ class RandomApiCall extends Command
         $url = $baseUrl . '/api/v2' . $randomEndpoint['path'];
         
         $this->info("Calling endpoint: {$randomEndpoint['method']} {$url}");
+
+        $merchant_id = rand(pow(10, 12 - 1), pow(10, 12) - 1);
+
+
+        $treblleMetadata = [
+            'user-id' => Arr::random(['PayPal', 'Rippling', 'Sephora', 'Lyft', 'Domino\'s', 'Macy\'s']),
+            'Plan' => Arr::random(['Platinum Plan', 'Titanium Plan', 'Gold Plan']),
+            'Region' => Arr::random(['US', 'EU', 'APAC']),
+            'Merchant ID' => $merchant_id
+        ];
         
         try {
             $response = Http::withHeaders([
                 'Request-ID' => uniqid('random_'),
-                'Merchant-ID' => rand(pow(10, 12 - 1), pow(10, 12) - 1),
+                'Merchant-ID' => $merchant_id,
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . Str::random(24),
+                'treblle-metadata' => '{}'
             ])->timeout(30);
             
             if ($randomEndpoint['method'] === 'GET') {
