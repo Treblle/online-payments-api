@@ -45,6 +45,15 @@ class RandomApiCall extends Command
             'Region' => Arr::random(['US', 'EU', 'APAC']),
             'Merchant ID' => $merchant_id,
         ];
+
+        $userAgents = [
+            'Mozilla/5.0 (X11; U; Linux armv7l like Android; en-us) AppleWebKit/531.2+ (KHTML, like Gecko) Version/5.0 Safari/533.2+ Kindle/3.0+',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edg/91.0.864.48',
+            'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0',
+            'Mozilla/5.0 (compatible; ClaudeBot/1.0; +https://anthropic.com/bot)',
+            'Mozilla/5.0 (compatible; ChatGPT-User/1.0; +https://openai.com/bot)',
+            'Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://www.perplexity.ai/bot)'
+        ];
         
         try {
             $response = Http::withHeaders([
@@ -52,6 +61,7 @@ class RandomApiCall extends Command
                 'Merchant-ID' => $merchant_id,
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . Str::random(24),
+                'user-agent' => Arr::random($userAgents),
                 'treblle-metadata' => json_encode($treblleMetadata)
             ])->timeout(30);
             
