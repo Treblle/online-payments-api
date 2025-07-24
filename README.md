@@ -154,13 +154,16 @@ php artisan migrate
    The API will be available at:
    - Docker: `http://localhost:8080/api/v2/`
    - Local PHP: `http://localhost:8000/api/v2/`
+   - **Live Mock API**: `https://jpm-online-payments-api.laravel.cloud/api/v2/`
 
    ```bash
-   # For Docker
-   curl http://localhost:8080/api/v2/healthcheck/payments
+   # Set your base URL (choose one)
+   BASE_URL="http://localhost:8080"          # For Docker
+   BASE_URL="http://localhost:8000"          # For local PHP  
+   BASE_URL="https://jpm-online-payments-api.laravel.cloud"  # For live mock API
    
-   # For local PHP
-   curl http://localhost:8000/api/v2/healthcheck/payments
+   # Test the API
+   curl $BASE_URL/api/v2/healthcheck/payments
    ```
 
 
@@ -242,7 +245,8 @@ Optional headers:
 ### Create a Payment
 
 ```bash
-curl -X POST "http://localhost:8000/api/v2/payments" \
+# Set your base URL first (see Getting Started section)
+curl -X POST "$BASE_URL/api/v2/payments" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "merchant-id: 998482157630" \
@@ -269,7 +273,7 @@ curl -X POST "http://localhost:8000/api/v2/payments" \
 ### Capture a Payment
 
 ```bash
-curl -X POST "http://localhost:8000/api/v2/payments/txn_12345/captures" \
+curl -X POST "$BASE_URL/api/v2/payments/txn_12345/captures" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "merchant-id: 998482157630" \
@@ -284,7 +288,7 @@ curl -X POST "http://localhost:8000/api/v2/payments/txn_12345/captures" \
 ### Create a Refund
 
 ```bash
-curl -X POST "http://localhost:8000/api/v2/refunds" \
+curl -X POST "$BASE_URL/api/v2/refunds" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -H "merchant-id: 998482157630" \
