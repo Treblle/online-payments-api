@@ -46,17 +46,6 @@ This project includes Laravel Sail for Docker-based development. You can use Doc
    cp .env.example .env
    ```
    Configure the Treblle SDK Token and API Key in the `.env` file
-   
-   **Database Options:**
-   - **SQLite (Default)**: Keep `DB_CONNECTION=sqlite` - simpler, no additional setup needed
-   - **MySQL**: Change to `DB_CONNECTION=mysql` and add:
-     ```
-     DB_HOST=mysql
-     DB_PORT=3306
-     DB_DATABASE=laravel
-     DB_USERNAME=sail
-     DB_PASSWORD=password
-     ```
 
 4. **Start with Laravel Sail**
    ```bash
@@ -68,14 +57,8 @@ This project includes Laravel Sail for Docker-based development. You can use Doc
    ./vendor/bin/sail artisan key:generate
    ```
 
-6. **Run migrations**
-   ```bash
-   ./vendor/bin/sail artisan migrate
-   ```
+The API will be available at `http://localhost:8080/api/v2/`
 
-The API will be available at `http://localhost/api/v2/`
-
-**Note:** Laravel Sail includes MySQL service by default. If you prefer to keep using SQLite and remove MySQL from Docker, you can edit `docker-compose.yml` to remove the MySQL service and its dependency.
 
 ### Option 2: Local PHP Installation
 
@@ -97,7 +80,6 @@ The API will be available at `http://localhost/api/v2/`
    composer install
    cp .env.example .env
    php artisan key:generate
-   php artisan migrate
    ```
 
 #### macOS
@@ -129,7 +111,6 @@ The API will be available at `http://localhost/api/v2/`
    composer install
    cp .env.example .env
    php artisan key:generate
-   php artisan migrate
    ```
 
 #### Linux (Ubuntu/Debian)
@@ -171,12 +152,12 @@ php artisan migrate
 
 3. **Test the API**
    The API will be available at:
-   - Docker: `http://localhost/api/v2/`
+   - Docker: `http://localhost:8080/api/v2/`
    - Local PHP: `http://localhost:8000/api/v2/`
 
    ```bash
    # For Docker
-   curl http://localhost/api/v2/healthcheck/payments
+   curl http://localhost:8080/api/v2/healthcheck/payments
    
    # For local PHP
    curl http://localhost:8000/api/v2/healthcheck/payments
