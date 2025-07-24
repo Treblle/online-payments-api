@@ -12,6 +12,13 @@ class VerificationController extends Controller
     {
         $requestId = $request->header('request-id');
         $merchantId = $request->header('merchant-id');
+
+        if($request->input('currency') == 'HRK') {
+            return response()->json([
+                'error' => 'Currency HRK is not supported',
+                'code' => 'CURRENCY_NOT_SUPPORTED'
+            ], 500);
+        }
         
         // Mock verification creation response
         return response()->json([

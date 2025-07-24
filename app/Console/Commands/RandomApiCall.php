@@ -235,7 +235,27 @@ class RandomApiCall extends Command
                         'ipAddress' => '192.168.1.' . rand(1, 255)
                     ]
                 ]
-            ]
+            ],
+            [
+                'path' => '/payments',
+                'method' => 'POST',
+                'data' => []
+            ],
+            [
+                'path' => '/verifications',
+                'method' => 'POST',
+                'data' => [
+                    'currency' => 'HRK',
+                    'paymentMethodType' => [
+                        'card' => [
+                            'accountNumber' => '2211987',
+                            'expiryMonth' => '12',
+                            'expiryYear' => '2025',
+                            'cvv' => '123'
+                        ]
+                    ]
+                ]
+            ],
         ];
     }
 }
