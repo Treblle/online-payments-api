@@ -24,14 +24,7 @@ This project includes Laravel Sail for Docker-based development. You can use Doc
 
 2. **Install Composer dependencies**
    
-   **Option A: Using Composer on your machine** (requires Composer installed)
-   ```bash
-   composer install --ignore-platform-reqs
-   ```
-   
-   *To install Composer: Download from [getcomposer.org](https://getcomposer.org/download/) or use `brew install composer` on macOS*
-   
-   **Option B: Using Docker without Composer** (no Composer installation needed)
+   **Option A: Using Docker without Composer** (no Composer installation needed)
    ```bash
    docker run --rm \
        -u "$(id -u):$(id -g)" \
@@ -40,6 +33,13 @@ This project includes Laravel Sail for Docker-based development. You can use Doc
        laravelsail/php84-composer:latest \
        composer install --ignore-platform-reqs
    ```
+   
+   **Option B: Using Composer on your machine** (requires Composer installed)
+   ```bash
+   composer install --ignore-platform-reqs
+   ```
+   
+   *To install Composer: Download from [getcomposer.org](https://getcomposer.org/download/) or use `brew install composer` on macOS*
 
 3. **Set up environment**
    ```bash
