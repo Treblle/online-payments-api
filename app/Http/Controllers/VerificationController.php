@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateVerificationRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class VerificationController extends Controller
 {
-    public function create(Request $request): JsonResponse
+    public function create(CreateVerificationRequest $request): JsonResponse
     {
         $requestId = $request->header('request-id');
         $merchantId = $request->header('merchant-id');
 
-        if($request->input('currency') == 'HRK') {
+        if ($request->input('currency') === 'HRK') {
             return response()->json([
-                'error' => 'Currency HRK is not supported',
-                'code' => 'CURRENCY_NOT_SUPPORTED'
-            ], 500);
+                'responseStatus' => 'ERROR',
+                'responseCode' => '422',
+                'responseMessage' => 'Currency HRK is not supported',
+                'errors' => ['currency' => ['Currency HRK is not supported']]
+            ], 422);
         }
         
         // Mock verification creation response

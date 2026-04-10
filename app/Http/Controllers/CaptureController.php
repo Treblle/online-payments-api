@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCaptureRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CaptureController extends Controller
 {
-    public function createForPayment(string $paymentId, Request $request): JsonResponse
+    public function createForPayment(string $paymentId, CreateCaptureRequest $request): JsonResponse
     {
         $requestId = $request->header('request-id');
         $merchantId = $request->header('merchant-id');

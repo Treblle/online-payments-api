@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRefundRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Str;
 
 class RefundController extends Controller
 {
-    public function create(Request $request): JsonResponse
+    public function create(CreateRefundRequest $request): JsonResponse
     {
         $requestId = $request->header('request-id');
         $merchantId = $request->header('merchant-id');

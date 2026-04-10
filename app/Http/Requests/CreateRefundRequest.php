@@ -11,7 +11,7 @@ class CreateRefundRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->hasHeader('merchant-id') && $this->hasHeader('request-id');
     }
 
     /**
@@ -22,7 +22,24 @@ class CreateRefundRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => 'required|integer|min:1',
+            'currency' => 'required|string|size:3',
+            'parentTransactionId' => 'required|string|max:64',
+            'refundType' => 'string|in:REFERENCED,STANDALONE',
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'amount.required' => 'Refund amount is required',
+            'amount.integer' => 'Refund amount must be an integer in cents',
+            'currency.required' => 'Currency code is required',
+            'currency.size' => 'Currency code must be exactly 3 characters',
+            'parentTransactionId.required' => 'Parent transaction ID is required',
         ];
     }
 }

@@ -11,7 +11,7 @@ class CreateCaptureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->hasHeader('merchant-id') && $this->hasHeader('request-id');
     }
 
     /**
@@ -22,7 +22,22 @@ class CreateCaptureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'amount' => 'required|integer|min:1',
+            'currency' => 'required|string|size:3',
+            'finalCapture' => 'boolean',
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'amount.required' => 'Capture amount is required',
+            'amount.integer' => 'Capture amount must be an integer in cents',
+            'currency.required' => 'Currency code is required',
+            'currency.size' => 'Currency code must be exactly 3 characters',
         ];
     }
 }
